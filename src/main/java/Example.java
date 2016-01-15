@@ -12,8 +12,8 @@ class Example{
         t2.name = "Watch MTV";
         t2.done = true;
         try {
-            t1 = om.readValue(new File("resources/todo1.json"), Todo.class);
-            om.writeValue(new File("resources/todo2.json"), t2);
+            t1 = om.readValue(new File("src/main/resources/todo1.json"), Todo.class);
+            om.writeValue(new File("src/main/resources/todo2.json"), t2);
         } catch (Exception e) {
             e.printStackTrace();
         }
