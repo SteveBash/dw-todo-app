@@ -1,2 +1,3 @@
 Main-Class: Example
 Created-by: Nelson
+Class-Path: libs/jackson-core-2.7.0.jar libs/jackson-databind-2.7.0.jar libs/jackson-annotations-2.7.0.jar .
