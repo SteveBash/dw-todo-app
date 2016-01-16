@@ -70,4 +70,20 @@ public class TodosDAO{
             e.printStackTrace();
         }
     }
+
+    public static void update(Integer id, Boolean done){
+        Connection conn = null;
+        if(JdbcConnection.getConnection().isPresent()){
+            conn = JdbcConnection.getConnection().get();
+            System.out.println("Conn succ");
+        }
+        try {
+            PreparedStatement st = conn.prepareStatement("UPDATE todos SET done=? WHERE id=?");
+            st.setBoolean(1, done);
+            st.setInt(2, id);
+            st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

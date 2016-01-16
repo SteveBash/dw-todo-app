@@ -55,4 +55,22 @@ public class TodosServlet extends HttpServlet{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void doPut(HttpServletRequest req, HttpServletResponse res){
+        Todo t = new Todo();
+        ObjectMapper om = new ObjectMapper();
+        String path = req.getPathInfo();
+        String[] pathParts = path.split("/");
+        Integer id = Integer.parseInt(pathParts[1]);
+        res.setContentType("application/json"); 
+        try {
+            t = om.readValue(req.getInputStream(), Todo.class);
+            PrintWriter writer = res.getWriter();
+            TodosDAO.update(id, t.getDone());
+            res.setStatus(HttpStatus.OK_200);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
