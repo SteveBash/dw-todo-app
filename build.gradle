@@ -14,7 +14,8 @@ dependencies{
         'org.eclipse.jetty:jetty-server:9.2.11.v20150529',
         'org.eclipse.jetty:jetty-servlet:9.2.11.v20150529',
         'postgresql:postgresql:9.1-901-1.jdbc4',
-        'org.projectlombok:lombok:1.16.6'
+        'org.projectlombok:lombok:1.16.6',
+        'org.jdbi:jdbi:2.71'
     )
 }
 

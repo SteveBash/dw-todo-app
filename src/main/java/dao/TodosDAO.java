@@ -7,6 +7,7 @@ import models.Todo;
 import config.JdbcConnection;
 
 public class TodosDAO{
+
     public static List<Todo> findAll(){
         List<Todo> todos = new ArrayList<Todo>();
         Connection conn = null;
@@ -30,5 +31,26 @@ public class TodosDAO{
             System.out.println("Query error");
         }
         return todos;
+    }
+
+    public static Integer create(Todo t){
+        Connection conn = null;
+        Integer id = -1;
+        if(JdbcConnection.getConnection().isPresent()){
+            conn = JdbcConnection.getConnection().get();
+            System.out.println("Conn succ");
+        }
+        try {
+            PreparedStatement st = conn.prepareStatement("INSERT INTO todos(name, done) VALUES(?, ?)", new String[]{"id"});
+            st.setString(1, t.getName());
+            st.setBoolean(2, t.getDone());
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if(rs.next())
+                id = rs.getInt(1); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 }
