@@ -21,9 +21,9 @@ public class TodosDAO{
             rs = conn.prepareStatement("SELECT * FROM todos").executeQuery();
             while(rs.next()){
                 temp = new Todo();
-                temp.setId(Integer.parseInt(rs.getString("id")));
+                temp.setId(rs.getInt("id"));
                 temp.setName(rs.getString("name"));
-                temp.setDone(Boolean.parseBoolean(rs.getString("done")));
+                temp.setDone(rs.getBoolean("done"));
                 todos.add(temp);
             }
         } catch (SQLException e) {
@@ -33,7 +33,7 @@ public class TodosDAO{
         return todos;
     }
 
-    public static Integer create(Todo t){
+    public static Todo create(Todo t){
         Connection conn = null;
         Integer id = -1;
         if(JdbcConnection.getConnection().isPresent()){
@@ -46,11 +46,13 @@ public class TodosDAO{
             st.setBoolean(2, t.getDone());
             st.executeUpdate();
             ResultSet rs = st.getGeneratedKeys();
-            if(rs.next())
+            if(rs.next()){
                 id = rs.getInt(1); 
+                t.setId(id);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return id;
+        return t;
     }
 }
