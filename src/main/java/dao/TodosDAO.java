@@ -20,9 +20,9 @@ public class TodosDAO{
             rs = conn.prepareStatement("SELECT * FROM todos").executeQuery();
             while(rs.next()){
                 temp = new Todo();
-                temp.id = Integer.parseInt(rs.getString("id"));
-                temp.name = rs.getString("name");
-                temp.done = Boolean.parseBoolean(rs.getString("done"));
+                temp.setId(Integer.parseInt(rs.getString("id")));
+                temp.setName(rs.getString("name"));
+                temp.setDone(Boolean.parseBoolean(rs.getString("done")));
                 todos.add(temp);
             }
         } catch (SQLException e) {

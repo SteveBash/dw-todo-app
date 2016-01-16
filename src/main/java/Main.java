@@ -1,4 +1,6 @@
 
+import models.Todo;
+
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.servlet.*;
 
