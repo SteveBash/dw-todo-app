@@ -8,7 +8,7 @@ public class Main{
         Integer port = 8000;
         Server server = new Server(port);
         ServletContextHandler handler = new ServletContextHandler(server, "/");
-        handler.addServlet(ExampleServlet.class, "/exampleServlet");
+        handler.addServlet(TodosServlet.class, "/exampleServlet");
         try {
             server.start();
             System.out.println(String.format("Server started in %s", port));
