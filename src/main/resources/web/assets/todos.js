@@ -8,37 +8,21 @@ var lisTodos = "";
 
 var liTodo = function(todo){
     var className = todo.done?"done":"";
-    return "<li class="+className+">"+todo.name+"</li>";
+    return "<li data-todo-id="+ todo.id +" class="+className+">"+todo.name+ deleteButton(todo) +"</li>";
 }
 
-//-----------------------------------------
+var deleteButton = function(todo){
+   return "<button data-todo-id="+todo.id+">x</button>"; 
+}
 
-var getTodos = new XMLHttpRequest();
-getTodos.open("GET", "http://localhost:8000/todos", true);
-
-getTodos.addEventListener("load", function(){
-    var todos = JSON.parse(this.response);    
-    todos.map(function(todo){
-        lisTodos = lisTodos.concat(liTodo(todo));  
-    });
-    todosListEl.innerHTML = lisTodos;
+todosListEl.addEventListener("click", function(e){
+    var id = e.target.attributes["data-todo-id"].value;
+    if(e.target.tagName.toUpperCase()=="BUTTON")
+        deleteTodos(id).send();
+    else{
+        updateTodos(id).send(JSON.stringify({ done : "true"}));
+    }
 });
-
-getTodos.send();
-
-//-----------------------------------------
-
-var postTodos = new XMLHttpRequest();
-postTodos.open("POST", "http://localhost:8000/todos", true);
-postTodos.setRequestHeader("Content-type", "application/json");
-
-postTodos.addEventListener("load", function(){
-    var newTodo = JSON.parse(this.response);    
-    lisTodos = lisTodos.concat(liTodo(newTodo));
-    todosListEl.innerHTML = lisTodos;
-});
-
-//-----------------------------------------
 
 inputTodoEl.addEventListener("keypress", function(e){
     if( e.keyCode == 13 ){
@@ -47,3 +31,4 @@ inputTodoEl.addEventListener("keypress", function(e){
     }
 });
 
+getTodos.send();
