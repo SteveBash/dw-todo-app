@@ -55,4 +55,19 @@ public class TodosDAO{
         }
         return t;
     }
+
+    public static void delete(Integer id){
+        Connection conn = null;
+        if(JdbcConnection.getConnection().isPresent()){
+            conn = JdbcConnection.getConnection().get();
+            System.out.println("Conn succ");
+        }
+        try {
+            PreparedStatement st = conn.prepareStatement("DELETE FROM todos WHERE id=?");
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

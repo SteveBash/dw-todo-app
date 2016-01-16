@@ -39,4 +39,20 @@ public class TodosServlet extends HttpServlet{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void doDelete(HttpServletRequest req, HttpServletResponse res){
+        Todo t = new Todo();
+        ObjectMapper om = new ObjectMapper();
+        res.setContentType("application/json"); 
+        String path = req.getPathInfo();
+        String[] pathParts = path.split("/");
+        Integer id = Integer.parseInt(pathParts[1]);
+        TodosDAO.delete(id);
+        try {
+            res.setStatus(HttpStatus.OK_200);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

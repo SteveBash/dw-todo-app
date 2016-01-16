@@ -20,7 +20,7 @@ public class Main{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        handler.addServlet(TodosServlet.class, "/todos");
+        handler.addServlet(TodosServlet.class, "/todos/*");
         handler.addServlet(ViewServlet.class, "/welcome");
         try {
             server.start();
