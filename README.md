@@ -8,6 +8,7 @@ This project needs an postgresql database installed http://www.postgresql.org/do
 To run this you should install a GUI for interacting with the database 
 https://dbheroapp.com/gui-database-client-for-mysql-postgresql-windows
 
+```
 CREATE DATABASE todos;
 
 CREATE TABLE todos(
@@ -15,6 +16,7 @@ CREATE TABLE todos(
     name TEXT,
     done BOOLEAN
 );
+```
 
 ## Then compile and run:
 
